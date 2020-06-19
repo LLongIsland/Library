@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AccountMapper {
     User getAccountByName(@Param("email") String email);
+    int createNewAccount(User user);
 }

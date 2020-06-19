@@ -5,6 +5,7 @@ public class UserVO {
     private String email;
     private String password;
     private String name;
+    private String account;
     private double credit;
     private Integer condi;
 
@@ -30,6 +31,14 @@ public class UserVO {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public void setCondi(Integer condi) {
