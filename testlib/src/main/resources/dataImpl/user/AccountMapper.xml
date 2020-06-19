@@ -4,11 +4,16 @@
     <select id="getAccountByName" resultMap="User">
         select * from User where email=#{email}
     </select>
+    <insert id="createNewAccount" parameterType="com.example.testlib.po.User" useGeneratedKeys="true" keyProperty="id">
+        insert into USER (email,password,name,account,credit,condi)
+        values(#{email},#{password},#{name},#{account},#{credit},#{condi})
+    </insert>
     <resultMap id="User" type="com.example.testlib.po.User">
         <id column="id" property="id"></id>
         <result column="email" property="email"></result>
         <result column="password" property="password"></result>
         <result column="name" property="name"></result>
+        <result column="account" property="account"></result>
         <result column="credit" property="credit"></result>
         <result column="condi" property="condi"></result>
     </resultMap>

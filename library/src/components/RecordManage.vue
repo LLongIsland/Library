@@ -148,7 +148,6 @@
             obj.rname = e.rname
             obj.borrowTime = new Date(Number(e.borrowTime)).toLocaleString()
             obj.condi = e.condi
-            obj.limitTime=new Date(Number(e.limitTime)).toLocaleString()
             if (e.condi == 1) {
               var c = new Date(Number(e.returnTime))
               obj.condi = "已于"+c.toLocaleString()+"归还"

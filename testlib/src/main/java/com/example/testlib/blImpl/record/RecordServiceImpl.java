@@ -39,7 +39,11 @@ public class RecordServiceImpl implements RecordService {
         for (int i = 0; i < records.size(); i++) {
             DisplayRecordVo displayRecordVo = new DisplayRecordVo();
             BeanUtils.copyProperties(records.get(i), displayRecordVo);
-            displayRecordVo.setAtitle(bookService.getBookById(displayRecordVo.getId()).getTitle());
+            String temp=displayRecordVo.getRaccount();
+            displayRecordVo.setAtitle(bookService.getBookById(displayRecordVo.getAid()).getTitle());
+            if(temp!=null)
+                if(readerService.getReaders(temp).size()!=0)
+                    displayRecordVo.setRname(readerService.getReaders(temp).get(0).getName());
             displayRecordVo.setRname(readerService.getReaders(displayRecordVo.getRaccount()).get(0).getName());
             displayRecordVos.add(displayRecordVo);
         }
