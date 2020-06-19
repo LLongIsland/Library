@@ -1,14 +1,14 @@
-<template>
+﻿<template>
   <div class="container">
     <Table border :columns="columns7" :data="data6"></Table>
-	<br>
+    <br>
     <Page :total="total" :page-size="10" @on-change="changePage"></Page>
   </div>
 </template>
 <script type="es6">
   export default {
     name: 'MyRecord',
-    data () {
+    data() {
       return {
         total: '',
         condi: '',
@@ -21,25 +21,11 @@
         columns7: [
           {
             title: '编号',
-            key: 'bid',
-            render: (h, params) => {
-              return h('div', [
-                h('Icon', {
-                  props: {
-                    type: 'document-text'
-                  }
-                }),
-                h('strong', params.row.bid)
-              ]);
-            }
+            key: 'id',
           },
           {
             title: '书名',
-            key: 'title'
-          },
-          {
-            title: '编号',
-            key: 'number'
+            key: 'atitle'
           },
           {
             title: '借阅者学号',
@@ -51,14 +37,10 @@
           },
           {
             title: '借阅时间',
-            key: 'time'
+            key: 'borrowTime'
           },
           {
-            title: '应归还时间',
-            key: 'backtime'
-          },
-          {
-            title: '是否超期',
+            title: '归还日期',
             key: 'condi'
           }
         ],
@@ -66,49 +48,50 @@
         data7: [] //存放从后台请求过来的借阅记录
       }
     },
-    mounted(){
+    mounted() {
       this.request(1);
     },
     methods: {
-      request (currentPage){
-        var that=this
-        this.$http.post(that.GLOBAL.serverPath + '/excise/getAllBorrowRecords',
+      request(currentPage) {
+        var that = this
+        this.$http.get(that.GLOBAL.serverPath + '/excise/getAllBorrowRecords',
           {
-            raccount: window.localStorage.getItem('account'),
-            currentPage: currentPage
-          },
-          {
-            emulateJSON: true
+            params: {
+              raccount: window.localStorage.getItem('account'),
+            }
           }
         ).then(function (res) {
-          console.log(res.data.borrowrecords)
-          that.total=res.data.pageInfo.total
-          that.data6=[]
-          that.data7=res.data.borrowrecords
-          that.data7.forEach((e) =>{
+          that.total = res.data.content.length
+          that.data6 = []
+          that.data7 = res.data.content
+          that.data7.forEach((e) => {
             let obj = {}
-            obj.bid = e.bid
-            obj.title = e.album.title
-            obj.number = e.subalbum.number
+            obj.id = e.id
+            obj.atitle = e.atitle
             obj.raccount = e.raccount
-            obj.rname = e.reader.name
-            obj.time = e.time
-            obj.backtime = e.backtime
-            var time = new Date().getTime();
-            console.log(time)
-            if(time < e.inttime){
-              obj.condi = '未超期'
-            }else{
-              var delayDay = Math.ceil((time - e.inttime)/86400000)
-              obj.condi = '超期'+delayDay+'天'
+            obj.rname = e.rname
+            obj.borrowTime = (new Date(Number(e.borrowTime))).toLocaleString()
+            obj.condi = e.condi
+            if (e.condi == 1) {
+              obj.condi = '已归还'
+            } else {
+              var time = new Date().getTime();
+              console.log(time)
+              if (time < e.limitTime) {
+                obj.condi = '未归还'
+              } else {
+                var delayDay = Math.ceil((time - e.limitTime) / 86400000)
+                obj.condi = '逾期' + delayDay + '天'
+              }
             }
             that.data6.push(obj)
           })
         })
       },
-      changePage: function(page){
+      changePage: function (page) {
         this.request(page)
       },
+
     }
   }
 </script>

@@ -5,6 +5,7 @@ public class User {
     private String email;
     private String password;
     private String name;
+    private String account;
     private double credit;
     private Integer condi;
 
@@ -28,6 +29,8 @@ public class User {
         return name;
     }
 
+    public String getAccount(){return account;}
+
     public String getPassword() {
         return password;
     }
@@ -50,6 +53,10 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public void setPassword(String password) {

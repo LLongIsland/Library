@@ -5,7 +5,7 @@ public class RecordVO {
     private Integer aid;
     private String raccount;
     private String borrowTime;
-    private String returnTime;
+    private String limitTime;
     private Integer condi;//0表示未归还
 
     public Integer getId() {
@@ -36,9 +36,8 @@ public class RecordVO {
         return raccount;
     }
 
-    public String getReturnTime() {
-        return returnTime;
-    }
+
+    public String getLimitTime(){return limitTime;}
 
     public void setAid(Integer aid) {
         this.aid = aid;
@@ -52,7 +51,6 @@ public class RecordVO {
         this.raccount = raccount;
     }
 
-    public void setReturnTime(String returnTime) {
-        this.returnTime = returnTime;
-    }
+    public void setLimitTime(String limitTime) {this.limitTime=limitTime;}
+
 }

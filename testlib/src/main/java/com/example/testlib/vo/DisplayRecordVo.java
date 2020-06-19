@@ -1,13 +1,15 @@
-package com.example.testlib.po;
+package com.example.testlib.vo;
 
-public class Record {
+public class DisplayRecordVo {
     private Integer id;
     private Integer aid;
+    private String atitle;
     private String raccount;
+    private String rname;
     private String borrowTime;
     private String returnTime;
     private String limitTime;
-    private Integer condi;
+    private Integer condi;//0表示未归还
 
     public Integer getId() {
         return id;
@@ -25,16 +27,12 @@ public class Record {
         return condi;
     }
 
+    public String getAtitle(){return atitle;}
+
+    public String getRname(){return rname;}
+
     public Integer getAid() {
         return aid;
-    }
-
-    public String getLimitTime() {
-        return limitTime;
-    }
-
-    public void setLimitTime(String limitTime) {
-        this.limitTime = limitTime;
     }
 
     public String getBorrowTime() {
@@ -45,6 +43,11 @@ public class Record {
         return raccount;
     }
 
+    public String getReturnTime() {
+        return returnTime;
+    }
+
+    public String getLimitTime(){return limitTime;}
 
     public void setAid(Integer aid) {
         this.aid = aid;
@@ -62,7 +65,9 @@ public class Record {
         this.returnTime = returnTime;
     }
 
-    public String getReturnTime() {
-        return returnTime;
-    }
+    public void setLimitTime(String limitTime) {this.limitTime=limitTime;}
+
+    public void setAtitle(String atitle){this.atitle=atitle;}
+
+    public void setRname(String rname){this.rname=rname;}
 }

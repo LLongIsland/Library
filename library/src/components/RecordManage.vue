@@ -1,9 +1,9 @@
-<template>
+﻿<template>
   <div class="container">
     <el-form ref="formInline" :model="formInline" :rules="ruleInline" inline>
       <el-form-item prop="borrowRecord">
         <el-input type="text" v-model="formInline.raccount" placeholder="借阅者学号">
-        <i class="el-icon-user" slot="prepend"></i>
+          <i class="el-icon-user" slot="prepend"></i>
         </el-input>
       </el-form-item>
       <el-form-item>
@@ -19,7 +19,7 @@
 <script type="es6">
   export default {
     name: 'UserManage',
-    data () {
+    data() {
       return {
         total: '',
         condi: '',
@@ -32,25 +32,11 @@
         columns7: [
           {
             title: '编号',
-            key: 'bid',
-            render: (h, params) => {
-              return h('div', [
-                h('Icon', {
-                  props: {
-                    type: 'document-text'
-                  }
-                }),
-                h('strong', params.row.bid)
-              ]);
-            }
+            key: 'id',
           },
           {
             title: '书名',
-            key: 'title'
-          },
-          {
-            title: '编号',
-            key: 'number'
+            key: 'atitle'
           },
           {
             title: '借阅者学号',
@@ -62,14 +48,10 @@
           },
           {
             title: '借阅时间',
-            key: 'time'
+            key: 'borrowTime'
           },
           {
-            title: '应归还时间',
-            key: 'backtime'
-          },
-          {
-            title: '是否超期',
+            title: '归还情况',
             key: 'condi'
           },
           {
@@ -93,7 +75,7 @@
                     }
                   }
                 }, '查看'),
-                h('Button', {
+                (params.row.condi.indexOf("已")==-1)?h('Button', {
                   props: {
                     type: 'error',
                     size: 'small'
@@ -103,7 +85,7 @@
                       this.reback(params.index)
                     }
                   }
-                }, '确认归还')
+                }, '确认归还'):undefined
               ]);
             }
           }
@@ -112,77 +94,79 @@
         data7: [] //存放从后台请求过来的借阅记录
       }
     },
-    mounted(){
+    mounted() {
       this.request(1);
     },
     methods: {
       handleSubmit(account) {
         this.request(1)
       },
-      show (index) {
+      show(index) {
         this.$Modal.info({
           title: '书籍信息',
-          content: `书名：${this.data6[index].title}<br>书籍编号：${this.data6[index].number}<br>借阅者学号：${this.data6[index].raccount}<br>借阅者姓名：${this.data6[index].rname}<br>借阅时间：${this.data6[index].time}<br>应归还时间：${this.data6[index].backtime}<br>状态：${this.data6[index].condi}`
+          content: `书名：${this.data6[index].atitle}<br>书籍编号：${this.data6[index].aid}<br>借阅者学号：${this.data6[index].raccount}<br>借阅者姓名：${this.data6[index].rname}<br>借阅时间：${this.data6[index].borrowTime}<br>应归还时间：${this.data6[index].limitTime}<br>状态：${this.data6[index].condi}`
         })
       },
-      reback (index) {
+      reback(index) {
         //this.data6.splice(index, 1);
-        var that=this
-        this.$http.post(that.GLOBAL.serverPath + '/excise/reback',
+        var that = this
+        this.$http.get(that.GLOBAL.serverPath + '/excise/reback',
           {
-            bid: that.data6[index].bid,
-            sid: that.data6[index].sid
-          },
-          {
-            emulateJSON: true
+            params: {
+              id: that.data6[index].id,
+              returnTime: new Date().getTime()
+            }
           }
         ).then(function (res) {
-          if(res.data.status == 'yes'){
-            that.data6.splice(index,1)
+          if (res.data.success) {
+            that.data6.splice(index, 1)
             this.$Message.success('操作成功')
-          }else{
+          } else {
             this.$Message.status('操作失败')
           }
         })
       },
-      request (currentPage){
-        var that=this
-        this.$http.post(that.GLOBAL.serverPath + '/excise/getAllBorrowRecords',
+      request(currentPage) {
+        var that = this
+        this.$http.get(that.GLOBAL.serverPath + '/excise/getAllBorrowRecords',
           {
-            raccount: that.formInline.raccount,
-            currentPage: currentPage
+            params: {
+              raccount: that.formInline.raccount.toString(),
+            }
           },
-          {
-            emulateJSON: true
-          }
         ).then(function (res) {
-          console.log(res.data.borrowrecords)
-          that.total=res.data.pageInfo.total
-          that.data6=[]
-          that.data7=res.data.borrowrecords
-          that.data7.forEach((e) =>{
+          console.log(res.data.content)
+          that.total = res.data.content.length
+          that.data6 = []
+          that.data7 = res.data.content
+          that.data7.forEach((e) => {
             let obj = {}
-            obj.bid = e.bid
-            obj.title = e.album.title
-            obj.number = e.subalbum.number
+            obj.id = e.id
+            obj.atitle = e.atitle
+            obj.aid=e.aid
             obj.raccount = e.raccount
-            obj.rname = e.reader.name
-            obj.time = e.time
-            obj.backtime = e.backtime
-            obj.sid = e.sid
-            var time = new Date().getTime();
-            console.log(time)
-            if(time < e.inttime){
-              obj.condi = '未超期'
-            }else{
-              var delayDay = Math.ceil((time - e.inttime)/86400000)
-              obj.condi = '超期'+delayDay+'天'
+            obj.rname = e.rname
+            obj.borrowTime = new Date(Number(e.borrowTime)).toLocaleString()
+            obj.condi = e.condi
+            obj.limitTime=new Date(Number(e.limitTime)).toLocaleString()
+            if (e.condi == 1) {
+              var c = new Date(Number(e.returnTime))
+              obj.condi = "已于"+c.toLocaleString()+"归还"
+            } else {
+              var time = new Date().getTime();
+              console.log(time)
+              if (time < e.limitTime) {
+                obj.condi = '未归还'
+              } else {
+                var delayDay = Math.ceil((time - e.limitTime) / 86400000)
+                obj.condi = '逾期' + delayDay + '天'
+              }
             }
             that.data6.push(obj)
           })
         })
       },
-      changePage: function(page){
+      changePage: function (page) {
         this.request(page)
       },
     }

@@ -1,12 +1,12 @@
 package com.example.testlib.po;
 
 public class Book {
-    private Integer num;
     private Integer id;
     private String title;
     private String author;
     private String publisher;
     private String publishtime;
+    private Integer num;
     private String descri;
 
     public Integer getNum() {

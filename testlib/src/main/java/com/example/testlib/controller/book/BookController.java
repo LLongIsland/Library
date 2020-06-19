@@ -4,7 +4,6 @@ import com.example.testlib.bl.book.BookService;
 import com.example.testlib.po.Book;
 import com.example.testlib.vo.BookVO;
 import com.example.testlib.vo.ResponseVO;
-import com.example.testlib.vo.SubBookVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +22,8 @@ public class BookController {
     }
 
     @PostMapping("/addSubAlbum")
-    public ResponseVO addSubBook(@RequestBody SubBookVO subBookVO){
-        return bookService.updateBook(subBookVO.getId(),subBookVO.getNumber());
+    public ResponseVO addSubBook(@RequestBody BookVO BookVO){
+        return bookService.updateBook(BookVO.getId(),BookVO.getNum());
     }
     @GetMapping("/getAllAlbums")
     public ResponseVO getAllSearchBooks(@RequestParam String title){

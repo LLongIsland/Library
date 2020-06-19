@@ -1,4 +1,4 @@
-<template>
+﻿<template>
 
   <div class="hello">
     登录还用不了，这里点进去可以看到页面<br>
@@ -86,15 +86,15 @@ export default {
               console.log(res.data)
               if (res.data.success) {
                 this.$Message.success('登录成功!')
-                window.localStorage.setItem('userId', res.data.loginUser.rid)
-                window.localStorage.setItem('account', res.data.loginUser.account)
-                window.localStorage.setItem('username', res.data.loginUser.name)
-                window.localStorage.setItem('sex', res.data.loginUser.sex)
-                window.localStorage.setItem('condi', res.data.loginUser.condi)
+                window.localStorage.setItem('userId', res.data.content.id)
+                window.localStorage.setItem('username', res.data.content.name)
+	window.localStorage.setItem('account', res.data.content.account)
+                window.localStorage.setItem('sex', res.data.content.credit)
+                window.localStorage.setItem('condi', res.data.content.condi)
                 console.log('hahaha' + res.data.condi)
-                if (res.data.condi === 2) {
+                if (res.data.content.condi ==2) {
                   this.$router.replace({path: '/index'})
-                } else if (res.data.condi === 1) {
+                } else if (res.data.content.condi == 1) {
                   this.$router.replace({path: '/manager'})
                 } else {
                   this.$router.replace({path: '/reader'})

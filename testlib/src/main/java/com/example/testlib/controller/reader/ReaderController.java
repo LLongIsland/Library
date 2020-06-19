@@ -18,7 +18,6 @@ public class ReaderController {
     }
     @PostMapping("/addReader")
     public ResponseVO addReader(@RequestBody ReaderVO readerVO){
-        System.out.println("test");
         return readerService.addReader(readerVO);
     }
 }

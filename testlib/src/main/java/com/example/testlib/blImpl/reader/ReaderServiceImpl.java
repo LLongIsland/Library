@@ -28,7 +28,7 @@ public class ReaderServiceImpl implements ReaderService {
     public ResponseVO addReader(ReaderVO readerVO) {
         Reader reader=new Reader();
         BeanUtils.copyProperties(readerVO,reader);
-        if(readerMapper.getReadersByAccount(reader.getAccount())!=null)
+        if(readerMapper.getReadersByAccount(reader.getAccount()).size()!=0)
             return ResponseVO.buildFailure(ACCOUNT_EXIST);
         readerMapper.createNewReader(reader);
         return ResponseVO.buildSuccess();

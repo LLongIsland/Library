@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="container">
     <el-form ref="formInline" :model="formInline" inline>
       <el-form-item prop="account">
@@ -67,7 +67,7 @@
         ruleItem3: {
           num: [{
             required: true,
-            message: '请填写书籍副本编号！',
+            message: '请填写副本数量！',
             trigger: 'blur'
           }]
         },
@@ -104,7 +104,7 @@
           },
           {
             title: '可借副本',
-            key: 'count'
+            key: 'num'
           },
           {
             title: '操作',
@@ -158,7 +158,7 @@
         this.$Modal.info({
           title: '书籍信息',
           width: '1100',
-          content: `书名：${this.data6[index].title}<br>作者：${this.data6[index].author}<br>出版社：${this.data6[index].publisher}<br>出版时间：${this.data6[index].publishtime}<br>副本数量：${this.data6[index].num}<br>可借数量：${this.data6[index].count}<br>可借副本编号：<span style="color:red;">${this.data6[index].suba}</span><br>介绍：${this.data6[index].descri}`
+          content: `书名：${this.data6[index].title}<br>作者：${this.data6[index].author}<br>出版社：${this.data6[index].publisher}<br>出版时间：${this.data6[index].publishtime}<br>副本数量：${this.data6[index].num}<br>介绍：${this.data6[index].descri}`
         })
       },
       borrow (index) {
@@ -168,13 +168,15 @@
           {
             aid: that.data6[index].aid,
             rid: window.localStorage.getItem('userId'),
-            raccount: window.localStorage.getItem('account')
+            raccount: window.localStorage.getItem('account'),
+            borrowTime:new Date().getTime(),
+            limitTime:new Date().getTime()+86400000*30
           }
         ).then(function (res) {
-          if(res.data.status == 'ok'){
+          if(res.data.success){
             this.$Message.success('借阅成功,注意归还日期！')
-            that.data6[index].count=that.data6[index].count-1
-            if(that.data6[index].count == 0){
+            that.data6[index].num=that.data6[index].num-1
+            if(that.data6[index].num == 0){
               this.data6[index].unBorrowed = true
             }
           }else{
@@ -186,38 +188,37 @@
         var that=this
         this.$http.get(that.GLOBAL.serverPath + '/excise/getAllAlbums',
           {
-            param:{
+            params:{
               title:that.formInline.title
-            }
+             }
           }
         ).then(function (res) {
-          console.log(res.data.pageInfo)
-          that.total=res.data.pageInfo.total
+          console.log(res.data.content)
+          that.total=res.data.content.length
           that.data6=[]
-          that.data7=res.data.albums
+          that.data7=res.data.content
           that.data7.forEach((e) => {
             let obj={}
-            obj.aid = e.aid
+            obj.aid = e.id
             obj.title = e.title
             obj.author = e.author
             obj.publisher = e.publisher
             obj.publishtime = e.publishtime
             obj.num = e.num
             obj.descri = e.descri
-            var count=0
             var s=''
+            /*
             e.subalbums.forEach((item)=>{
               if( item.condi==0 ){
                 count++
                 s=s+item.number+','
               }
-            })
-            if(count == 0){
+            })*/
+            if(e.num == 0){
               obj.unBorrowed = true
             }else{
               obj.unBorrowed = false
             }
-            obj.count = count
             obj.suba = s
             that.data6.push(obj)
           })

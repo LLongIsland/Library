@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="container">
     <el-form ref="formInline" :model="formInline" :rules="ruleInline" inline>
       <el-form-item prop="account">
@@ -31,8 +31,8 @@
         </FormItem>
         <FormItem label="性别" prop="sex">
           <RadioGroup v-model="formItem2.sex">
-            <Radio label="0">男</Radio>
-            <Radio label="1">女</Radio>
+            <Radio label="1">男</Radio>
+            <Radio label="0">女</Radio>
           </RadioGroup>
         </FormItem>
         <FormItem label="身份" prop="condi">
@@ -59,7 +59,7 @@
         formItem2: {
           account: '',
           name: '',
-          sex: '0',
+          sex: '男',
           condi: '0'
         },
         ruleItem2: {
@@ -96,10 +96,6 @@
           {
             title: '性别',
             key: 'sex'
-          },
-          {
-            title: '录入时间',
-            key: 'time'
           },
           {
             title: '身份',
@@ -157,6 +153,11 @@
         }else{
           this.condi='图书管理员'
         }
+        if(this.data6[index].condi==0){
+          this.sex='女'
+        }else{
+          this.sex='男'
+        }
         this.$Modal.info({
           title: '用户信息',
           content: `姓名：${this.data6[index].name}<br>年龄：${this.data6[index].sex}<br>学号：${this.data6[index].account}<br>身份：${this.condi}`
@@ -174,9 +175,9 @@
             }
           }
         ).then(function (res) {
-          console.log(res.data.pageInfo)
-          that.total=res.data.pageInfo.total
-          that.data6=res.data.readers
+          console.log(res.data.content)
+          that.total=res.data.content.length
+          that.data6=res.data.content
         }).catch((e) => {
           this.$Message.fail('网络有误！')
         })
@@ -196,8 +197,8 @@
                 condi: Number(that.formItem2.condi),
               }
             ).then(function (res) {
-              console.log(res.data.status)
-              if(res.data.status=='ok'){
+              console.log(res.data.success)
+              if(res.data.success){
                 that.$Message.success('新增成功')
                 that.formInline.account=''
                 that.request(1)

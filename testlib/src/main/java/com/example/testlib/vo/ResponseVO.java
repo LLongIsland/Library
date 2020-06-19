@@ -16,7 +16,6 @@ public class ResponseVO {
      * 内容
      */
     private Object content;
-
     public static ResponseVO buildSuccess(){
 
 

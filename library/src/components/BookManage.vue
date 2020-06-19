@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="container">
     <el-form ref="formInline" :model="formInline" :rules="ruleInline" inline>
       <el-form-item prop="account">
@@ -56,7 +56,7 @@
       @on-ok="ok2('formItem3')"
     >
       <Form ref="formItem3" :model="formItem3" :rules="ruleItem3" :label-width="80">
-        <FormItem label="编号" prop="num">
+        <FormItem label="副本数量" prop="num">
           <Input v-model="formItem3.num" placeholder=""></Input>
         </FormItem>
       </Form>
@@ -116,7 +116,7 @@
         ruleItem3: {
           num: [{
             required: true,
-            message: '请填写书籍副本编号！',
+            message: '请填写副本数量！',
             trigger: 'blur'
           }]
         },
@@ -186,7 +186,7 @@
                       this.currIndex = this.data6[params.index].aid
                     }
                   }
-                }, '添加编号副本'),
+                }, '添加副本'),
                 h('Button', {
                   props: {
                     type: 'error',
@@ -231,7 +231,7 @@
             params:{title:that.formInline.title}
           }
         ).then(function (res) {
-          console.log(res.data)
+          console.log(res.data.content)
           that.total=res.data.content.length
           that.data6=[]
           that.data7=res.data.content
@@ -301,7 +301,7 @@
                 descri: that.formItem2.descri
               }
             ).then(function (res) {
-              console.log(res.data.status)
+              console.log(res.data.success)
               if(res.data.success){
                 //that.$Message.success('新增成功')
                 that.$Notice.config({
@@ -330,9 +330,9 @@
         this.$refs[name].validate((valid) => {
           if (valid) {
             that.$http.post(that.GLOBAL.serverPath + '/excise/addSubAlbum',
-              {
-                  id: that.currIndex,
-                  number: that.formItem3.num
+              {	  
+	  id:that.currIndex,
+                  num: that.formItem3.num
               }
             ).then(function (res) {
               console.log(res.data.success)

@@ -11,7 +11,8 @@ import java.util.List;
 @Repository
 public interface RecordMapper {
     List<Record> getRecordByAccount(@Param("account") String account);
+    List<Record> getAllRecord();
     int createRecord(Record record);
     Record getRecordById(@Param("id") int id);
-    int updateCondi(@Param("id") int id,@Param("condi") int condi);
+    int updateCondi(@Param("id") int id,@Param("condi") int condi,@Param("returnTime") String returnTime);
 }

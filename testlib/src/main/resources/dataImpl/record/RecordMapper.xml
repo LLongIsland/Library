@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.testlib.data.record.RecordMapper">
+    <select id="getAllRecord" resultMap="Record">
+        select * from Record
+    </select>
     <select id="getRecordByAccount" resultMap="Record">
-        select * from Record where account=#{account}
+        select * from Record where raccount=#{account}
     </select>
     <select id="getRecordById" resultMap="Record">
         select * from Record where id=#{id}
     </select>
     <update id="updateCondi">
-        update Record set condi=#{condi}
+        update Record set condi=#{condi},returnTime=#{returnTime}
         where id=#{id}
     </update>
     <insert id="createRecord" parameterType="com.example.testlib.po.Record" useGeneratedKeys="true" keyProperty="id">
-        insert into Record(aid,raccount,borrowTime,returnTime,condi)
-        values(#{aid},#{raccount},#{borrowTime},#{returnTime},#{condi})
+        insert into Record(aid,raccount,borrowTime,limitTime,condi)
+        values(#{aid},#{raccount},#{borrowTime},#{limitTime},#{condi})
     </insert>
     <resultMap id="Record" type="com.example.testlib.po.Record">
         <id column="id" property="id"></id>

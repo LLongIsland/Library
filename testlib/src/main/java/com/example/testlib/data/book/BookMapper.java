@@ -14,5 +14,5 @@ public interface BookMapper {
     int updateNum(@Param("id") int id,@Param("num") int number);
     Book getBookById(@Param("id")int id);
     List<Book> getBooksByTitle(@Param("title") String title);
-    List<Book>getAllBooks();
+    List<Book> getAllBooks();
 }
