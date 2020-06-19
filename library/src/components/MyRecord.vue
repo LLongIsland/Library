@@ -40,7 +40,7 @@
             key: 'borrowTime'
           },
           {
-            title: '归还日期',
+            title: '借阅情况',
             key: 'condi'
           }
         ],
@@ -78,7 +78,8 @@
               var time = new Date().getTime();
               console.log(time)
               if (time < e.limitTime) {
-                obj.condi = '未归还'
+                var restDay = Math.ceil((e.limitTime - time) / 86400000)
+                obj.condi = '未归还，剩余' + restDay + '天'
               } else {
                 var delayDay = Math.ceil((time - e.limitTime) / 86400000)
                 obj.condi = '逾期' + delayDay + '天'

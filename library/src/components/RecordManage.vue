@@ -104,7 +104,7 @@
       show(index) {
         this.$Modal.info({
           title: '书籍信息',
-          content: `书名：${this.data6[index].atitle}<br>书籍编号：${this.data6[index].aid}<br>借阅者学号：${this.data6[index].raccount}<br>借阅者姓名：${this.data6[index].rname}<br>借阅时间：${this.data6[index].borrowTime}<br>应归还时间：${this.data6[index].limitTime}<br>状态：${this.data6[index].condi}`
+          content: `书名：${this.data6[index].atitle}<br>书籍编号：${this.data6[index].aid}<br>借阅者学号：${this.data6[index].raccount}<br>借阅者姓名：${this.data6[index].rname}<br>借阅时间：${this.data6[index].borrowTime}<br>借阅期限：${this.data6[index].limitTime} 前<br>状态：${this.data6[index].condi}`
         })
       },
       reback(index) {
@@ -124,6 +124,7 @@
           } else {
             this.$Message.status('操作失败')
           }
+          this.request(1)
         })
       },
       request(currentPage) {
@@ -147,6 +148,7 @@
             obj.raccount = e.raccount
             obj.rname = e.rname
             obj.borrowTime = new Date(Number(e.borrowTime)).toLocaleString()
+            obj.limitTime=new Date(Number(e.limitTime)).toLocaleString()
             obj.condi = e.condi
             if (e.condi == 1) {
               var c = new Date(Number(e.returnTime))
