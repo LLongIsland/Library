@@ -14,6 +14,9 @@
  Date: 19/06/2020 17:19:39
 */
 
+CREATE DATABASE library;
+USE library;
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 

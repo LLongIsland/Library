@@ -165,6 +165,13 @@
       },
       remove (index) {
         this.data6.splice(index, 1);
+        var that=this;
+        this.$http.get(that.GLOBAL.serverPath + '/excise/removeReaders',
+          {
+            params:{ index }
+          }
+        ).then(this.request(1))
+
       },
       request (currentPage){
         var that=this

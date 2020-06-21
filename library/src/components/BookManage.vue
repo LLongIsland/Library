@@ -223,6 +223,14 @@
       },
       remove (index) {
         this.data6.splice(index, 1);
+        var that=this
+        this.$http.get(that.GLOBAL.serverPath + '/excise/removeAlbums',
+          {
+            params:{index}
+          }
+        ).then(
+        this.request(1)
+      )
       },
       request (currentPage){
         var that=this
@@ -330,7 +338,7 @@
         this.$refs[name].validate((valid) => {
           if (valid) {
             that.$http.post(that.GLOBAL.serverPath + '/excise/addSubAlbum',
-              {	  
+              {
 	  id:that.currIndex,
                   num: that.formItem3.num
               }

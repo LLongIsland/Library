@@ -1,11 +1,10 @@
 ﻿<template>
 
   <div class="hello">
-    登录还用不了，这里点进去可以看到页面<br>
-    <router-link to="/Manager">Manger.vue</router-link><br>
-    <router-link to="/Reader">Reader.vue</router-link><br>
-    <router-link to="/Index">Index.vue</router-link><br>
-
+<!--    登录还用不了，这里点进去可以看到页面<br>-->
+<!--    <router-link to="/Manager">Manger.vue</router-link><br>-->
+<!--    <router-link to="/Reader">Reader.vue</router-link><br>-->
+<!--    <router-link to="/Index">Index.vue</router-link><br>-->
     <el-form ref="formItem" :model="formItem" :rules="ruleItem" :label-width="80">
       <el-row>
         <el-col :xs="23" :sm="23" :md="23" :lg="23">

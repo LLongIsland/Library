@@ -1,7 +1,7 @@
 <template>
 
   <div class="layout">
-    <router-link to="/UserManage">管理用户界面</router-link>
+    <router-link to="/">返回登录界面</router-link>
     <el-row type="flex">
       <el-col span="5" class="layout-menu-left">
       <el-menu  active-name="1-1" theme="light" width="auto" :open-names="['1']">
