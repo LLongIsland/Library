@@ -8,6 +8,9 @@
         insert into USER (email,password,name,account,credit,condi)
         values(#{email},#{password},#{name},#{account},#{credit},#{condi})
     </insert>
+    <delete id="delAccout">
+        delete from USER where email=#{email}
+    </delete>
     <resultMap id="User" type="com.example.testlib.po.User">
         <id column="id" property="id"></id>
         <result column="email" property="email"></result>

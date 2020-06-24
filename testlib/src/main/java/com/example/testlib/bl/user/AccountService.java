@@ -9,4 +9,6 @@ public interface AccountService {
     User login(UserForm userForm);
     ResponseVO addUser(String account);
     ResponseVO addUser(UserVO userVO);
+    ResponseVO delUser(String account);
+    ResponseVO delUser(UserVO userVO);
 }

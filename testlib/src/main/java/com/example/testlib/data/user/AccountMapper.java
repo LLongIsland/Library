@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface AccountMapper {
     User getAccountByName(@Param("email") String email);
     int createNewAccount(User user);
+    int delAccount(@Param("email") String email);
 }

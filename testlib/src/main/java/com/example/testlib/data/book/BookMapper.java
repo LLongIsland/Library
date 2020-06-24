@@ -12,6 +12,7 @@ import java.util.List;
 public interface BookMapper {
     int addBook(Book book);
     int updateNum(@Param("id") int id,@Param("num") int number);
+    int delBook(@Param("id")int id);
     Book getBookById(@Param("id")int id);
     List<Book> getBooksByTitle(@Param("title") String title);
     List<Book> getAllBooks();

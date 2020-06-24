@@ -10,6 +10,7 @@ import java.util.List;
 public interface BookService {
     ResponseVO addBook(BookVO bookVO);
     ResponseVO updateBook(int id,int number);
+    ResponseVO delBook(BookVO bookVO);
     List<Book> getAllSearchBooks(String title);
     Book getBookById(Integer id);
 }

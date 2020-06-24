@@ -9,4 +9,5 @@ import java.util.List;
 public interface ReaderService {
     List<Reader> getReaders(String account);
     ResponseVO addReader(ReaderVO readerVO);
+    ResponseVO delReader(ReaderVO readerVO);
 }

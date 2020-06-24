@@ -11,6 +11,9 @@
         insert into Reader(account,name,sex,condi)
         values(#{account},#{name},#{sex},#{condi})
     </insert>
+    <delete id="delReader">
+        delete from Reader where account=#{account}
+    </delete>
     <resultMap id="Reader" type="com.example.testlib.po.Reader">
         <id column="id" property="id"></id>
         <result column="account" property="account"></result>

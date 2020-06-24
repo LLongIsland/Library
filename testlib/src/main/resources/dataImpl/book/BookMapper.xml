@@ -5,6 +5,9 @@
         insert into Book(title,author,publisher,publishtime,descri,num)
         values (#{title},#{author},#{publisher},#{publishtime},#{descri},#{num})
     </insert>
+    <delete id="delBook">
+        delete from Book where id=#{id}
+    </delete>
     <select id="getBookById" resultMap="Book">
         select * from Book where id=#{id}
     </select>
