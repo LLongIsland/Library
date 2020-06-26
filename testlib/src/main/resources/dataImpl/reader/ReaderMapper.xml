@@ -12,7 +12,7 @@
         values(#{account},#{name},#{sex},#{condi})
     </insert>
     <delete id="delReader">
-        delete from Reader where account=#{account}
+        delete from Reader where id=#{id}
     </delete>
     <resultMap id="Reader" type="com.example.testlib.po.Reader">
         <id column="id" property="id"></id>

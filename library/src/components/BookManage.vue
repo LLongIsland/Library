@@ -187,17 +187,17 @@
                     }
                   }
                 }, '添加副本'),
-                //h('Button', {
-                  //props: {
-                    //type: 'error',
-                    //size: 'small'
-                  //},
-                  //on: {
-                    //click: () => {
-                      //this.remove(params.index)
-                    //}
-                  //}
-                //}, '删除')
+                h('Button', {
+                  props: {
+                    type: 'error',
+                    size: 'small'
+                  },
+                  on: {
+                    click: () => {
+                      this.remove(params)
+                    }
+                  }
+                }, '删除')
               ]);
             }
           }
@@ -221,15 +221,18 @@
           content: `书名：${this.data6[index].title}<br>作者：${this.data6[index].author}<br>出版社：${this.data6[index].publisher}<br>出版时间：${this.data6[index].publishtime}<br>副本数量：${this.data6[index].num}<br>介绍：${this.data6[index].descri}`
         })
       },
-      remove (index) {
-        this.data6.splice(index, 1);
+      remove (record) {
         var that=this
+        var id=record.row.aid
         this.$http.get(that.GLOBAL.serverPath + '/excise/removeAlbums',
           {
-            params:{index}
+            params:{id}
           }
-        ).then(
-        this.request(1)
+        ).then(()=>{
+          that.$Message.success('删除成功！')
+          that.data6.splice(record.index, 1);
+          that.request(1)
+        }
       )
       },
       request (currentPage){
@@ -309,7 +312,6 @@
                 descri: that.formItem2.descri
               }
             ).then(function (res) {
-              console.log(res.data.success)
               if(res.data.success){
                 //that.$Message.success('新增成功')
                 that.$Notice.config({

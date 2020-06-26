@@ -32,8 +32,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public ResponseVO delBook(BookVO bookVO) {
-        bookMapper.delBook(bookVO.getId());
+    public ResponseVO delBook(Integer id) {
+        bookMapper.delBook(id);
         return ResponseVO.buildSuccess();
     }
 

@@ -22,9 +22,9 @@ public class BookController {
     }
 
 
-    @PostMapping("/delAlbum")
-    public ResponseVO delBook(@RequestBody BookVO bookVO){
-        return bookService.delBook(bookVO);
+    @GetMapping("/removeAlbums")
+    public ResponseVO delBook(@RequestParam Integer id){
+        return bookService.delBook(id);
     }
     @PostMapping("/addSubAlbum")
     public ResponseVO addSubBook(@RequestBody BookVO BookVO){

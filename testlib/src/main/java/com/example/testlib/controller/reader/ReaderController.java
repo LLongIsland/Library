@@ -20,9 +20,9 @@ public class ReaderController {
     public ResponseVO addReader(@RequestBody ReaderVO readerVO){
         return readerService.addReader(readerVO);
     }
-    @PostMapping("/delReader")
-    public ResponseVO delReader(@RequestBody ReaderVO readerVO){
+    @GetMapping("/removeReaders")
+    public ResponseVO delReader(@RequestParam Integer index){
 
-        return readerService.delReader(readerVO);
+        return readerService.delReader(index);
     }
 }
