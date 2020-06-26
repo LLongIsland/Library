@@ -46,4 +46,10 @@ public class AccountServiceImpl implements AccountService {
     public ResponseVO delUser(UserVO userVO) {
         return delUser(userVO.getAccount());
     }
+
+    @Override
+    public ResponseVO delUser(String account){
+        accountMapper.delAccount(account);
+        return ResponseVO.buildSuccess();
+    }
 }

@@ -40,8 +40,8 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public ResponseVO delReader(ReaderVO readerVO) {
-        readerMapper.delReader(readerVO.getId());
-        accountService.delUser(reader.getAccount());
+        readerMapper.delReader(readerVO.getAccount());
+        accountService.delUser(readerVO.getAccount());
         return ResponseVO.buildSuccess();
     }
 }
