@@ -36,7 +36,7 @@
           <el-input v-model="formItem2.publisher" placeholder=""></el-input>
         </el-form-item>
         <el-form-item label="出版时间" prop="publishtime">
-          <DatePicker v-model="formItem2.publishtime" prop="publishtime" type="date" placeholder="选择出版日期" style="width: 200px"></DatePicker>
+          <DatePicker v-model="formItem2.publishtime" prop="publishtime" type="date" format="yyyy-MM" placeholder="选择出版日期" style="width: 200px"></DatePicker>
         </el-form-item>
         <el-form-item label="描述" prop="descri">
           <!--<Input v-model="formItem2.descri" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="书籍描述..."></Input>-->
