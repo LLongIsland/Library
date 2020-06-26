@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <el-row type="flex">
+    <el-row type="flex" class="row">
       <el-col span="5" class="layout-menu-left">
       <el-menu active-name="1-1" width="auto" :open-names="['1']">
         <div class="layout-logo-left">
@@ -74,9 +74,17 @@
     height:600px;
   }
   .layout-breadcrumb{
-    padding: 10px 15px 0;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.67);
+    width:240px;
+    margin-top: -25px;
+    margin-left: 15px;
+    border-radius: 5px;
+    padding-buttom: 10px;
+    padding-top: 10px;
+    padding-left: 20px;
     text-align:left;
-    height:600px;
+    height:30px;
   }
   .layout-content{
     min-height: 200px;

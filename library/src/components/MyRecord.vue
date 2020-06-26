@@ -1,6 +1,6 @@
 ﻿<template>
   <div class="container">
-    <Table border :columns="columns7" :data="data6"></Table>
+    <Table border :columns="columns7" :data="data6" style="margin: 20px"></Table>
     <br>
     <Page :total="total" :page-size="10" @on-change="changePage"></Page>
   </div>

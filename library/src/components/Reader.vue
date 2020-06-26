@@ -1,7 +1,9 @@
 <template>
   <div class="layout">
     <el-row>
-      <router-link to="/" style="float:right;font-size:15px;color: ghostwhite">退出登录</router-link>
+      <el-button plain  size="mini" style="float:right; margin: 10px">
+        <router-link to="/"  >退出登录</router-link>
+      </el-button>
     </el-row>
     <el-row type="flex">
       <el-col span="5" class="layout-menu-left">
@@ -80,10 +82,20 @@
     background: url("timg.png");
     position: relative;
     margin-top:-60px;
+
   }
   .layout-breadcrumb{
-    padding: 10px 15px 0;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.67);
+    width:240px;
+    margin-top: -25px;
+    margin-left: 15px;
+    border-radius: 5px;
+    padding-buttom: 15px;
+    padding-top: 10px;
+    padding-left: 20px;
     text-align:left;
+    height:33px;
   }
   .layout-content{
     min-height: 200px;
@@ -104,7 +116,7 @@
   }
   .layout-menu-left{
     /* background: #464c5b; */
-    margin-top:40px;
+    margin-top:18px;
     margin-left:10px;
     border-radius:3px;
     opacity: 0.9;
