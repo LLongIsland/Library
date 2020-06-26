@@ -13,10 +13,10 @@
         <el-button round size="mini" type="primary" @click="modal1 = true">新添用户</el-button>
       </el-form-item>
     </el-form>
-    <Table border :columns="columns7" :data="data6"></Table>
+    <Table border :columns="columns7" :data="data6">
+    </Table>
     <br>
     <Page :total="total" :page-size="10" @on-change="changePage"></Page>
-
     <Modal
       v-model="modal1"
       title="新添用户"
@@ -106,6 +106,7 @@
                 h('font', params.row.sex?'男':'女')
               ]);
             }
+
           },
           {
             title: '身份',
