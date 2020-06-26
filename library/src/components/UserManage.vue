@@ -166,7 +166,7 @@
       remove (index) {
         this.data6.splice(index, 1);
         var that=this;
-        this.$http.get(that.GLOBAL.serverPath + '/excise/removeReaders',
+        this.$http.get(that.GLOBAL.serverPath + '/excise/delReader',
           {
             params:{ index }
           }
