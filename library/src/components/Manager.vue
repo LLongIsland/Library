@@ -15,6 +15,7 @@
           </template>
           <el-menu-item name="1-1" @click.native="lookBook"><span>图书管理</span></el-menu-item>
           <el-menu-item name="1-2" @click.native="lookRecord"><span>借阅记录</span></el-menu-item>
+          <el-menu-item name="1-3" @click.native="lookUser"><span>用户管理</span></el-menu-item>
         </el-submenu>
       </el-menu>
       </el-col>
@@ -31,6 +32,7 @@
         <div class="layout-content-main">
           <template id="bookManage"></template>
           <template id="recordManage"></template>
+          <template id="userManage"></template>
           <component :is="currentView"></component>
         </div>
       </div>
@@ -41,6 +43,7 @@
 <script>
   import bookManage from '../components/BookManage.vue'
   import recordManage from '../components/RecordManage.vue'
+  import userManage from '../components/UserManage.vue'
   import Button from 'iview/src/components/button/button'
   export default {
     name: 'Manager',
@@ -68,12 +71,19 @@
         this.two_nav = '后台管理'
         this.three_nav = '借阅记录'
         this.currentView = 'recordManage'
+      },
+      lookUser () {
+        this.one_nav = '主页'
+        this.two_nav = '后台管理'
+        this.three_nav = '用户管理'
+        this.currentView = 'userManage'
       }
     },
     components: {
       Button,
       bookManage: bookManage,
-      recordManage: recordManage
+      recordManage: recordManage,
+      userManage: userManage,
     }
   }
 </script>
