@@ -203,7 +203,7 @@
             obj.title = e.title
             obj.author = e.author
             obj.publisher = e.publisher
-            obj.publishtime = e.publishtime
+            obj.publishtime = e.publishtime.substr(4,4)+e.publishtime.substr(11,4)
             obj.num = e.num
             obj.descri = e.descri
             var s=''

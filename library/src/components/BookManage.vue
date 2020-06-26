@@ -187,17 +187,17 @@
                     }
                   }
                 }, '添加副本'),
-                h('Button', {
-                  props: {
-                    type: 'error',
-                    size: 'small'
-                  },
-                  on: {
-                    click: () => {
-                      this.remove(params.index)
-                    }
-                  }
-                }, '删除')
+                //h('Button', {
+                  //props: {
+                    //type: 'error',
+                    //size: 'small'
+                  //},
+                  //on: {
+                    //click: () => {
+                      //this.remove(params.index)
+                    //}
+                  //}
+                //}, '删除')
               ]);
             }
           }
@@ -218,7 +218,7 @@
           title: '书籍信息',
           width: '1100',
           //content: `书名：${this.data6[index].title}<br>作者：${this.data6[index].author}<br>出版社：${this.data6[index].publisher}<br>出版时间：${this.data6[index].publishtime}<br>副本数量：${this.data6[index].num}<br>介绍：${this.data6[index].descri}`
-          content: `书名：${this.data6[index].title}<br>作者：${this.data6[index].author}<br>出版社：${this.data6[index].publisher}<br>出版时间：${this.data6[index].publishtime}<br>副本数量：${this.data6[index].num}<br>可借数量：${this.data6[index].count}<br>可借副本编号：<span style="color:red;">${this.data6[index].suba}</span><br>介绍：${this.data6[index].descri}`
+          content: `书名：${this.data6[index].title}<br>作者：${this.data6[index].author}<br>出版社：${this.data6[index].publisher}<br>出版时间：${this.data6[index].publishtime}<br>副本数量：${this.data6[index].num}<br>介绍：${this.data6[index].descri}`
         })
       },
       remove (index) {
@@ -252,7 +252,7 @@
               obj.title = e.title
               obj.author = e.author
               obj.publisher = e.publisher
-              obj.publishtime = e.publishtime
+              obj.publishtime = e.publishtime.substr(4,4)+e.publishtime.substr(11,4)
               obj.num = e.num
               obj.descri = e.descri
               var count=0
