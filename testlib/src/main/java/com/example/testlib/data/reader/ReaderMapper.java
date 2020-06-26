@@ -13,5 +13,5 @@ public interface ReaderMapper {
     List<Reader> getReadersByAccount(@Param("account") String account);
     List<Reader> getAllReaders();
     int createNewReader(Reader reader);
-    int delReader(@Param("account") String account);
+    int delReader(@Param("id") Integer id);
 }
