@@ -2,8 +2,8 @@
   <div class="container">
     <el-form ref="formInline" :model="formInline" :rules="ruleInline" inline>
       <el-form-item prop="account">
-        <el-input  type="text" v-model="formInline.account" placeholder="学号">
-        <i class="el-icon-user" slot="prepend"></i>
+        <el-input type="text" v-model="formInline.account" placeholder="学号">
+          <i class="el-icon-user" slot="prepend"></i>
         </el-input>
       </el-form-item>
       <el-form-item>
@@ -21,7 +21,7 @@
       v-model="modal1"
       title="新添用户"
       @on-ok="ok('formItem2')"
-      >
+    >
       <Form ref="formItem2" :model="formItem2" :rules="ruleItem2" :label-width="80">
         <FormItem label="学号" prop="account">
           <Input v-model="formItem2.account" placeholder=""></Input>
@@ -48,7 +48,7 @@
 <script type="es6">
   export default {
     name: 'UserManage',
-    data () {
+    data() {
       return {
         total: '',
         condi: '',
@@ -95,11 +95,31 @@
           },
           {
             title: '性别',
-            key: 'sex'
+            key: 'sex',
+            render: (h, params) => {
+              return h('div', [
+                h('Icon', {
+                  props: {
+                    type: 'person'
+                  }
+                }),
+                h('font', params.row.sex?'男':'女')
+              ]);
+            }
           },
           {
             title: '身份',
-            key: 'condi'
+            key: 'condi',
+            render: (h, params) => {
+              return h('div', [
+                h('Icon', {
+                  props: {
+                    type: 'person'
+                  }
+                }),
+                h('font', params.row.condi?'图书管理员':'学生')
+              ]);
+            }
           },
           {
             title: '操作',
@@ -129,7 +149,7 @@
                   },
                   on: {
                     click: () => {
-                      this.remove(params.index)
+                      this.remove(params)
                     }
                   }
                 }, '删除')
@@ -140,60 +160,65 @@
         data6: []
       }
     },
-    mounted(){
+    mounted() {
       this.request(1);
     },
     methods: {
       handleSubmit(account) {
         this.request(1)
       },
-      show (index) {
-        if(this.data6[index].condi==0){
-          this.condi='学生'
-        }else{
-          this.condi='图书管理员'
+      show(index) {
+        if (this.data6[index].condi == 0) {
+          this.condi = '学生'
+        } else {
+          this.condi = '图书管理员'
         }
-        if(this.data6[index].condi==0){
-          this.sex='女'
-        }else{
-          this.sex='男'
+        if (this.data6[index].condi == 0) {
+          this.sex = '女'
+        } else {
+          this.sex = '男'
         }
         this.$Modal.info({
           title: '用户信息',
-          content: `姓名：${this.data6[index].name}<br>年龄：${this.data6[index].sex}<br>学号：${this.data6[index].account}<br>身份：${this.condi}`
+          content: `姓名：${this.data6[index].name}<br>性别：${this.data6[index].sex?'男':'女'}<br>学号：${this.data6[index].account}<br>身份：${this.condi}`
         })
       },
-      remove (index) {
-        this.data6.splice(index, 1);
-        var that=this;
-        this.$http.get(that.GLOBAL.serverPath + '/excise/delReader',
+      remove(record) {
+        var that = this;
+        this.$http.get(that.GLOBAL.serverPath + '/excise/removeReaders',
           {
-            params:{ index }
+            params: {
+              id:record.row.id
+            }
           }
-        ).then(this.request(1))
+        ).then(() => {
+          that.$Message.success('删除成功！')
+          that.data6.splice(record.index, 1);
+          that.request(1)
+        })
 
       },
-      request (currentPage){
-        var that=this
+      request(currentPage) {
+        var that = this
         this.$http.get(that.GLOBAL.serverPath + '/excise/getAllReaders',
           {
-            params:{
+            params: {
               account: that.formInline.account
             }
           }
         ).then(function (res) {
           console.log(res.data.content)
-          that.total=res.data.content.length
-          that.data6=res.data.content
+          that.total = res.data.content.length
+          that.data6 = res.data.content
         }).catch((e) => {
           this.$Message.fail('网络有误！')
         })
       },
-      changePage: function(page){
+      changePage: function (page) {
         this.request(page)
       },
-      ok (name) {
-        var that=this
+      ok(name) {
+        var that = this
         this.$refs[name].validate((valid) => {
           if (valid) {
             that.$http.post(that.GLOBAL.serverPath + '/excise/addReader',
@@ -205,11 +230,11 @@
               }
             ).then(function (res) {
               console.log(res.data.success)
-              if(res.data.success){
+              if (res.data.success) {
                 that.$Message.success('新增成功')
-                that.formInline.account=''
+                that.formInline.account = ''
                 that.request(1)
-              }else{
+              } else {
                 that.$Message.error('已存在该学号的用户')
               }
 

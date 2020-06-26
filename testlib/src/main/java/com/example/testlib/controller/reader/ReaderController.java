@@ -21,8 +21,7 @@ public class ReaderController {
         return readerService.addReader(readerVO);
     }
     @GetMapping("/removeReaders")
-    public ResponseVO delReader(@RequestParam Integer index){
-
-        return readerService.delReader(index);
+    public ResponseVO delReader(@RequestParam Integer id){
+        return readerService.delReader(id);
     }
 }
