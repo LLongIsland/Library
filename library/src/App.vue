@@ -19,5 +19,6 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
   height:600px;
+  background: url('assets/timg.png') repeat 100%;
 }
 </style>

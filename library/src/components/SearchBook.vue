@@ -119,7 +119,7 @@
                     size: 'small'
                   },
                   style: {
-                    marginRight: '5px'
+                    marginRight: '5px',
                   },
                   on: {
                     click: () => {

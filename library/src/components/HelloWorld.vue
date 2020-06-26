@@ -124,9 +124,11 @@ export default {
   Form{
     margin:0 auto;
     width:450px;
-    border: 2px  grey;
-    padding:50px 0;
-    /*background-color:red;*/
+    border: 2px grey;
+    padding:100px 30px;
+    background-color:white;
+    opacity:0.92;
+    height:600px
   }
   #login_btn{
     width:70%;

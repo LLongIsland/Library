@@ -1,6 +1,8 @@
 <template>
   <div class="layout">
-    <router-link to="/">返回登录界面</router-link>
+    <el-row>
+      <router-link to="/" style="float:right;font-size:15px;color: ghostwhite">退出登录</router-link>
+    </el-row>
     <el-row type="flex">
       <el-col span="5" class="layout-menu-left">
       <el-menu active-name="1-1" theme="light" width="auto" :open-names="['1']">
@@ -75,7 +77,7 @@
 <style scoped>
   .layout{
     border: 1px solid #d7dde4;
-    background: #f5f7f9;
+    background: url("timg.png");
     position: relative;
     margin-top:-60px;
   }
@@ -89,6 +91,7 @@
     overflow: hidden;
     background: #fff;
     border-radius: 4px;
+    opacity: 0.9;
   }
   .layout-content-main{
     padding: 10px;
@@ -101,6 +104,10 @@
   }
   .layout-menu-left{
     /* background: #464c5b; */
+    margin-top:40px;
+    margin-left:10px;
+    border-radius:3px;
+    opacity: 0.9;
   }
   .layout-header{
     height: 0px;
