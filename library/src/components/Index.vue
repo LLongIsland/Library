@@ -70,10 +70,13 @@
     background: #f5f7f9;
     position: relative;
     margin-top:-60px;
+    margin-bottom:10px;
+    height:600px;
   }
   .layout-breadcrumb{
     padding: 10px 15px 0;
     text-align:left;
+    height:600px;
   }
   .layout-content{
     min-height: 200px;

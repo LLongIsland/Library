@@ -7,7 +7,7 @@
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-button round size="mini" type="primary" @click="handleSubmit('formInline')">查找</el-button>
+        <el-button round size="small" type="primary" @click="handleSubmit('formInline')">查找</el-button>
       </el-form-item>
     </el-form>
     <Table border :columns="columns7" :data="data6"></Table>

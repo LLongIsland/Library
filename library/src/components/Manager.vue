@@ -97,6 +97,7 @@
   .layout-breadcrumb{
     padding: 10px 15px 0;
     text-align:left;
+    height:0px;
   }
   .layout-content{
     min-height: 200px;
@@ -107,17 +108,19 @@
   }
   .layout-content-main{
     padding: 10px;
+    height:670px;
   }
   .layout-copy{
     text-align: center;
     padding: 10px 0 20px;
     color: #9ea7b4;
+    height:600px;
   }
   .layout-menu-left{
-    background: #ffffff;
+
   }
   .layout-header{
-    height: 60px;
+    height: 0px;
     background: #fff;
     box-shadow: 0 1px 1px rgba(0,0,0,.1);
   }

@@ -92,6 +92,7 @@
   }
   .layout-content-main{
     padding: 10px;
+    height:650px;
   }
   .layout-copy{
     text-align: center;
@@ -102,7 +103,7 @@
     /* background: #464c5b; */
   }
   .layout-header{
-    height: 60px;
+    height: 0px;
     background: #fff;
     box-shadow: 0 1px 1px rgba(0,0,0,.1);
   }
