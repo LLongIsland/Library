@@ -103,7 +103,7 @@
       },
       show(index) {
         this.$Modal.info({
-          title: '书籍信息',
+          title: '借阅信息',
           content: `书名：${this.data6[index].atitle}<br>书籍编号：${this.data6[index].aid}<br>借阅者学号：${this.data6[index].raccount}<br>借阅者姓名：${this.data6[index].rname}<br>借阅时间：${this.data6[index].borrowTime}<br>借阅期限：${this.data6[index].limitTime} 前<br>状态：${this.data6[index].condi}`
         })
       },
